@@ -1,0 +1,23 @@
+.Flight {
+    width: 300px;
+    padding: 16px;
+    text-align: left;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition-duration: 0.7s;
+    transition-timing-function: ease-in-out;
+    transition-property: box-shadow, background-color;
+
+}
+
+.Flight:hover,
+.Flight:active {
+    background-color: #C0DDF5;
+    box-shadow: 8px 8px 6px -6px black;
+    transition-duration: 0.7s;
+    transition-timing-function: ease-in-out;
+    transition-property: box-shadow, background-color;
+}

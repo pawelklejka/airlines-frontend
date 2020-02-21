@@ -1,0 +1,38 @@
+.SearchStartingDestination {
+    flex-flow: row wrap;
+    min-height: 400px;
+    height: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+.SearchBar{
+    opacity: 0.6;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+.Flights{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 80%;
+    margin: auto; 
+}
+
+.SearchBar:hover{
+    opacity: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center
+}
+
