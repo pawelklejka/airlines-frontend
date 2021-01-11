@@ -58,11 +58,11 @@ class EditTourist extends Component {
 
     updateTouristToDatabase = () =>{
         const tourist = {
-            name: this.state.tourist.startingDestination,
-            surname: this.state.tourist.startingTime,
-            sex: this.state.tourist.arrivalTime,
-            country: this.state.tourist.rocketCapacity,
-            dateOfBirth: this.state.tourist.price,
+            name: this.state.tourist.name,
+            surname: this.state.tourist.surname,
+            sex: this.state.tourist.sex,
+            country: this.state.tourist.country,
+            dateOfBirth: this.state.tourist.dateOfBirth,
             notes: this.state.tourist.notes
         }
             axios.put('http://localhost:8081/tourist/' + this.props.match.params.id, tourist)
@@ -83,9 +83,21 @@ class EditTourist extends Component {
 
 
     onClickUpdateTouristHandler = (e) =>{
-        e.preventDefault();
         this.updateTouristToDatabase();
         
+    }
+
+    onSubmitHandler = event =>{
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        }
+        this.setState({validated: true});
+
+        if(form.checkValidity() === true){
+            this.onClickUpdateTouristHandler();
+        }
     }
 
 render(){
@@ -95,37 +107,47 @@ render(){
                     <Card.Header>Tourist ID: {this.state.tourist.id}</Card.Header>
                     <Card.Body>
                         <Card.Title>Form for editing tourist</Card.Title>
-                        <Form>
+                        <Form noValidate validated={this.state.validated} onSubmit={this.onSubmitHandler}>
                         <Form.Group controlId="setName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your name" value={this.state.tourist.name} onChange={(event) => this.setState({ tourist: {...this.state.tourist, name: event.target.value }})} />
+                            <Form.Control required type="text" placeholder="Type in your name" value={this.state.tourist.name} onChange={(event) => this.setState({ tourist: {...this.state.tourist, name: event.target.value }})} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your name</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setSurname">
                             <Form.Label>Surname</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your surname" value={this.state.tourist.surname} onChange={(event) => this.setState({ tourist: {...this.state.tourist, surname: event.target.value } })} />
+                            <Form.Control required type="text" placeholder="Type in your surname" value={this.state.tourist.surname} onChange={(event) => this.setState({ tourist: {...this.state.tourist, surname: event.target.value } })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your surname</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setSex">
                             <Form.Label>Sex</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your sex" value={this.state.tourist.sex} onChange={(event) => this.setState({ tourist: {...this.state.tourist, sex: event.target.value } })} />
+                            <Form.Control required type="text" placeholder="Type in your sex" value={this.state.tourist.sex} onChange={(event) => this.setState({ tourist: {...this.state.tourist, sex: event.target.value } })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your sex</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setCountry">
                             <Form.Label>Country</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your country" value={this.state.tourist.country} onChange={(event) => this.setState({ tourist: {...this.state.tourist, country: event.target.value } })} />
+                            <Form.Control required type="text" placeholder="Type in your country" value={this.state.tourist.country} onChange={(event) => this.setState({ tourist: {...this.state.tourist, country: event.target.value } })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your country</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setDateOfBirth">
-                            <Form.Label>Current date of birth: {this.state.tourist.dateOfBirth} <br /> Set date of birth: </Form.Label>
-                            <Form.Control type="date" value={this.state.tourist.dateOfBirth} onChange={(event) => this.setState({ tourist: {...this.state.tourist, dateOfBirth: event.target.value } })} />
+                            <Form.Label>Current date of birth: </Form.Label>
+                            <Form.Control required min="1900-01-01" type="date" value={this.state.tourist.dateOfBirth} onChange={(event) => this.setState({ tourist: {...this.state.tourist, dateOfBirth: event.target.value } })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your name</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setNotes">
                             <Form.Label>Type in any notes and any comments you have</Form.Label>
                             <Form.Control type="text" placeholder="Type in notes" value={this.state.tourist.notes} onChange={(event) => this.setState({ notes: event.target.value })} />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.onClickAddTouristHandler}> Update tourist </Button>
+                        <Button variant="primary" type="submit"> Update tourist </Button>
 
                     </Form>
                     </Card.Body>

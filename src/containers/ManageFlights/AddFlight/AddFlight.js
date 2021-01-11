@@ -47,10 +47,22 @@ class AddFlight extends Component {
 
     }
 
-    onClickAddFlightHandler = (e) =>{
-        e.preventDefault();
+    addFlightHandler = () =>{
         this.postFlightToDatabase();
         
+    }
+
+    onSubmitHandler = event =>{
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        }
+        this.setState({validated: true});
+
+        if(form.checkValidity() === true){
+            this.addFlightHandler();
+        }
     }
 
 render(){
@@ -60,33 +72,43 @@ render(){
                     <Card.Header>CosmicFligths</Card.Header>
                     <Card.Body>
                         <Card.Title>Form for adding flight</Card.Title>
-                        <Form>
+                        <Form noValidate validated={this.state.validated} onSubmit={this.onSubmitHandler}>
                             <Form.Group controlId="setStartingDestination">
                                 <Form.Label>Set the starting destination - city name</Form.Label>
-                                <Form.Control type="text" placeholder="Type in city name" value={this.state.startingDestination} onChange={(event) => this.setState({ startingDestination: event.target.value })} />
+                                <Form.Control required type="text" placeholder="Type in city name" value={this.state.startingDestination} onChange={(event) => this.setState({ startingDestination: event.target.value })} />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Type in city name</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="setStartingTime">
                                 <Form.Label>Set the starting date for the flight</Form.Label>
-                                <Form.Control type="datetime-local"  value={this.state.startingTime} onChange={(event) => this.setState({ startingTime: event.target.value })} />
+                                <Form.Control required min="2020-01-01T00:00" type="datetime-local"  value={this.state.startingTime} onChange={(event) => this.setState({ startingTime: event.target.value })} />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Type in starting date</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="setArrivalTime">
                                 <Form.Label>Set the arrival date for the flight</Form.Label>
-                                <Form.Control type="datetime-local"  value={this.state.arrivalTime} onChange={(event) => this.setState({ arrivalTime: event.target.value })} />
+                                <Form.Control required min="2020-01-01T03:00" type="datetime-local"  value={this.state.arrivalTime} onChange={(event) => this.setState({ arrivalTime: event.target.value })} />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Type in arrival date</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="setRocketCapacity">
                                 <Form.Label>Set the rocket capacity (number between 10 and 20)</Form.Label>
-                                <Form.Control type="number" placeholder="Type in the rocket capacity" min="10" max="20" value={this.state.rocketCapacity} onChange={(event) => this.setState({ rocketCapacity: event.target.value })} />
+                                <Form.Control required min="10" max="20" type="number" placeholder="Type in the rocket capacity" min="10" max="20" value={this.state.rocketCapacity} onChange={(event) => this.setState({ rocketCapacity: event.target.value })} />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Type inrocket capacity</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="setPrice">
                                 <Form.Label>Set the price per seat</Form.Label>
-                                <Form.Control type="number" placeholder="Type in the price" step="0.01" min="00.00" value={this.state.price} onChange={(event) => this.setState({ price: event.target.value })} />
+                                <Form.Control required type="number" placeholder="Type in the price" step="0.01" min="100.00" value={this.state.price} onChange={(event) => this.setState({ price: event.target.value })} />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">Type in price per seat</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Button variant="primary" type="submit" onClick={ this.onClickAddFlightHandler}> Add the flight </Button>
+                            <Button variant="primary" type="submit"> Add the flight </Button>
 
                         </Form>
                     </Card.Body>

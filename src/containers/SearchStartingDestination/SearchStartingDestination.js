@@ -93,8 +93,9 @@ class SearchStartingDestination extends Component{
         if(!this.state.error){
             flights = this.state.flights.map(flight => {
                 return(
-                    <Link to={'flight/' + flight.id} key={flight.id} style={{ textDecoration: 'none' }}>
-                        <Flight 
+                        <Flight
+                        id={flight.id} 
+                        key={flight.id}
                         startingDestination={flight.startingDestination}
                         flightStartingTime={flight.flightStartingTime}
                         flightArrivalTime={flight.flightArrivalTime}
@@ -102,8 +103,6 @@ class SearchStartingDestination extends Component{
                         touristAmount={flight.touristAmount}
                         price={flight.price}
                         />
-
-                    </Link>
                 )
             })
         }
@@ -116,7 +115,7 @@ class SearchStartingDestination extends Component{
                     <Form>
                         <Form.Group controlId="searchStartingDestination">
                             <Form.Label>Type in you starting destination</Form.Label>
-                            <Form.Control type="search" placeholder="search for flight" value={query} onChange={this.onInputChangeHandler}/>
+                            <Form.Control type="search" placeholder="search for flight" value={query} onChange={this.onInputChangeHandler} autocomplete="off"/>
                         </Form.Group>
                     </Form>
                 </Card.Body>

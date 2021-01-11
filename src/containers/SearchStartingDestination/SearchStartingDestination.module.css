@@ -29,7 +29,7 @@
     margin: auto; 
 }
 
-.SearchBar:hover{
+.SearchBar:hover, .SearchBar:focus-within{
     opacity: 1;
     display: inline-flex;
     align-items: center;

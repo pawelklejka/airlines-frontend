@@ -49,10 +49,22 @@ class AddTourist extends Component {
         }
     }
 
-    onClickAddTouristHandler = (e) =>{
-        e.preventDefault();
+    addTouristHandler = (e) =>{
         this.postTouristToDatabase();
         
+    }
+
+    onSubmitHandler = event =>{
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        }
+        this.setState({validated: true});
+
+        if(form.checkValidity() === true){
+            this.addTouristHandler();
+        }
     }
 
     render(){
@@ -65,37 +77,47 @@ class AddTourist extends Component {
                 <Card.Header>CosmicFlights</Card.Header>
                 <Card.Body>
                     <Card.Title>Form for adding tourist.</Card.Title>
-                    <Form>
+                    <Form noValidate validated={this.state.validated} onSubmit={this.onSubmitHandler}>
                         <Form.Group controlId="setName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your name" value={this.state.name} onChange={(event) => this.setState({ name: event.target.value })} />
+                            <Form.Control required type="text" placeholder="Type in your name" value={this.state.name} onChange={(event) => this.setState({ name: event.target.value })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your name</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setSurname">
                             <Form.Label>Surname</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your surname" value={this.state.surname} onChange={(event) => this.setState({ surname: event.target.value })} />
+                            <Form.Control required type="text" placeholder="Type in your surname" value={this.state.surname} onChange={(event) => this.setState({ surname: event.target.value })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your surname</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setSex">
                             <Form.Label>Sex</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your sex" value={this.state.sex} onChange={(event) => this.setState({ sex: event.target.value })} />
+                            <Form.Control required type="text" placeholder="Type in your sex" value={this.state.sex} onChange={(event) => this.setState({ sex: event.target.value })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your sex</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setCountry">
                             <Form.Label>Country</Form.Label>
-                            <Form.Control type="text" placeholder="Type in your country" value={this.state.country} onChange={(event) => this.setState({ country: event.target.value })} />
+                            <Form.Control required type="text" placeholder="Type in your country" value={this.state.country} onChange={(event) => this.setState({ country: event.target.value })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your country</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setDateOfBirth">
                             <Form.Label>Date of birth</Form.Label>
-                            <Form.Control type="date" value={this.state.dateOfBirth} onChange={(event) => this.setState({ dateOfBirth: event.target.value })} />
+                            <Form.Control min="1900-01-01" required type="date" value={this.state.dateOfBirth} onChange={(event) => this.setState({ dateOfBirth: event.target.value })} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Type in your date of birth</Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group controlId="setNotes">
                             <Form.Label>Type in any notes and any comments you have</Form.Label>
                             <Form.Control type="text" placeholder="Type in notes" value={this.state.notes} onChange={(event) => this.setState({ notes: event.target.value })} />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.onClickAddTouristHandler}> Add tourist </Button>
+                        <Button variant="primary" type="submit"> Add tourist </Button>
 
                     </Form>
                 </Card.Body>

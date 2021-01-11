@@ -7,10 +7,10 @@ import classes from './Tourist.module.css';
 
 const tourist = (props) => (
     <React.Fragment>
-<Card className={classes.Tourist} >
+    <Card className={classes.Tourist} >
         <Link to={'tourist/' + props.id} style={{ textDecoration: 'none' }}>
 
-            <Card.Img variant="top" src={user} alt="rocket" />
+            <Card.Img variant="top" src={user} alt="user" />
             <Card.Body>
                 <Card.Title>{props.name} {props.surname}</Card.Title>
                 <Card.Text>
