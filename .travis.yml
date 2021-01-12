@@ -9,3 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true pawelklejka/airlines-frontend npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  name: "airlines-frontend"
+  env: "AirlinesFrontend-env-1"
+  bucket_name: "elasticbeanstalk-us-east-2-478729113206"
+  bucket_path: "airlines-frontend"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
