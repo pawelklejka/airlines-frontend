@@ -15,10 +15,28 @@ class Header extends PureComponent{
             <Link to='/' className='nav-link'>Start</Link>
                 <Link to='/allFlights' className='nav-link'>Flights</Link>
                 <Link to='/allTourists' className='nav-link'>Tourists</Link>
-                <Link to='/addFlight' className='nav-link'>Add Flight</Link>
-                <Link to='/addTourist' className='nav-link'>Add Tourist</Link>
-        </Nav>
+                {this.props.signedIn ? 
+                <React.Fragment>
+                    <Link to='/addFlight' className='nav-link'>Add Flight</Link>
+                    <Link to='/addTourist' className='nav-link'>Add Tourist</Link>          
+                </React.Fragment>
+                : null
+                }
 
+                </Nav>
+                {this.props.signedIn ?
+                    <Link to="/login" onClick={this.props.onSignOut}>
+                        <Button variant='light' className='mr-1 my-1'>
+                        Sign In
+                        </Button>
+                    </Link>
+                    :
+                    <Link to="/" >
+                        <Button variant='outline-light' className='mr-1 my-1'>
+                            Sign out
+                        </Button>
+                    </Link>
+                }
         </Navbar.Collapse>
 
         </Navbar>
