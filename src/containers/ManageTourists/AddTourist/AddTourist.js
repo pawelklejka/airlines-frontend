@@ -10,8 +10,10 @@ class AddTourist extends Component {
         sex: '',
         country: '',
         dateOfBirth: '',
-        notes: ''
+        notes: '',
+        validated: false
     }
+
 
     postTouristToDatabase = () =>{
         const tourist = {
@@ -22,6 +24,7 @@ class AddTourist extends Component {
             dateOfBirth: this.state.dateOfBirth,
             notes: this.state.notes
         }
+        
         if(this.props.match.params.id == null){
             axios.post('http://localhost:8081/tourist/', tourist)
             .then(

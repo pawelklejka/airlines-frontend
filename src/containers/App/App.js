@@ -20,10 +20,18 @@ function App() {
       <Header />
       <Col className="page-container">
         <Switch>
-          <Route path="/addTourist" exact component={AddTourist} />
-          <Route path="/addFlight" exact component={AddFlight} />
-          <Route path="/allTourists" exact component={ManageTourists} />
-          <Route path="/allFlights" exact component={ManageFlights} />
+          <Route path="/addTourist" exact >
+            <AddTourist />
+          </Route>
+          <Route path="/addFlight" exact>
+            <AddFlight />
+          </Route>
+          <Route path="/allTourists" exact>
+            <ManageTourists />
+          </Route>
+          <Route path="/allFlights" exact >
+            <ManageFlights />
+          </Route>
           <Route
             path="/addTourist/:id"
             exact
