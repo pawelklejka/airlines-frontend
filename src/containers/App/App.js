@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import ManageFlights from "../ManageFlights/ManageFlights";
 import ManageTourists from "../ManageTourists/ManageTourists";
@@ -9,25 +9,32 @@ import EditFlight from "../ManageFlights/EditFlight/EditFlight";
 import EditTourist from "../ManageTourists/EditTourist/EditTourist";
 import AddFlight from "../ManageFlights/AddFlight/AddFlight";
 import Header from "../../components/Header/Header";
+import Login from "../../containers/Auth/Login/Login";
+import Register from "../../containers/Auth/Register/Register"
 import { Col } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import SearchStartingDestination from "../SearchStartingDestination/SearchStartingDestination";
 
 function App() {
+  const [signedIn, setSignedIn] = useState(true);
+
   return (
     <div className="App">
-      <Header />
+      <Header signedIn={signedIn}/>
       <Col className="page-container">
         <Switch>
-          <Route path="/addTourist" exact component={AddTourist} />
-          <Route path="/addFlight" exact component={AddFlight} />
           <Route path="/allTourists" exact component={ManageTourists} />
           <Route path="/allFlights" exact component={ManageFlights} />
+          <Route path="/addTourist" exact component={AddTourist} />
+          <Route path="/addFlight" exact component={AddFlight} />
+          <Route path="/login" ><Login /></Route>
+          <Route path="/register" ><Register /></Route>
+
           <Route
             path="/addTourist/:id"
             exact
-            render={(props) => <AddTourist {...props} />}
+            component={(props) => <AddTourist {...props} />}
           />
           <Route
             path="/addFlight/:id"
@@ -37,7 +44,7 @@ function App() {
           <Route
             path="/editTourist/:id"
             exact
-            render={(props) => <EditTourist {...props} />}
+            component={(props) => <EditTourist {...props} />}
           />
           <Route
             path="/editFlight/:id"
