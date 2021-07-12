@@ -115,7 +115,7 @@ class SearchStartingDestination extends Component{
                     <Form>
                         <Form.Group controlId="searchStartingDestination">
                             <Form.Label>Type in you starting destination</Form.Label>
-                            <Form.Control type="search" placeholder="search for flight" value={query} onChange={this.onInputChangeHandler} autocomplete="off"/>
+                            <Form.Control type="search" placeholder="search for flight" value={query} onChange={this.onInputChangeHandler} autoComplete="off"/>
                         </Form.Group>
                     </Form>
                 </Card.Body>

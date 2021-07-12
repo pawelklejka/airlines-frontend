@@ -9,7 +9,8 @@ import EditFlight from "../ManageFlights/EditFlight/EditFlight";
 import EditTourist from "../ManageTourists/EditTourist/EditTourist";
 import AddFlight from "../ManageFlights/AddFlight/AddFlight";
 import Header from "../../components/Header/Header";
-import Login from "../../containers/Login/Login";
+import Login from "../../containers/Auth/Login/Login";
+import Register from "../../containers/Auth/Register/Register"
 import { Col } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/addTourist" exact component={AddTourist} />
           <Route path="/addFlight" exact component={AddFlight} />
           <Route path="/login" ><Login /></Route>
+          <Route path="/register" ><Register /></Route>
 
           <Route
             path="/addTourist/:id"
