@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import ManageFlights from "../ManageFlights/ManageFlights";
 import ManageTourists from "../ManageTourists/ManageTourists";
@@ -15,9 +15,10 @@ import Footer from "../../components/Footer/Footer";
 import SearchStartingDestination from "../SearchStartingDestination/SearchStartingDestination";
 
 function App() {
+  const [isMonolith, setMonolith] = useState(true);
   return (
     <div className="App">
-      <Header />
+      <Header isMonolith={isMonolith} setMonolith={() => setMonolith(!isMonolith)}/>
       <Col className="page-container">
         <Switch>
           <Route path="/addTourist" exact >
@@ -27,30 +28,30 @@ function App() {
             <AddFlight />
           </Route>
           <Route path="/allTourists" exact>
-            <ManageTourists />
+            <ManageTourists isMonolith={isMonolith}/>
           </Route>
           <Route path="/allFlights" exact >
-            <ManageFlights />
+            <ManageFlights isMonolith={isMonolith}/>
           </Route>
           <Route
             path="/addTourist/:id"
             exact
-            render={(props) => <AddTourist {...props} />}
+            render={(props) => <AddTourist {...props} isMonolith={isMonolith}/>}
           />
           <Route
             path="/addFlight/:id"
             exact
-            component={(props) => <AddFlight {...props} />}
+            component={(props) => <AddFlight {...props} isMonolith={isMonolith}/>}
           />
           <Route
             path="/editTourist/:id"
             exact
-            render={(props) => <EditTourist {...props} />}
+            render={(props) => <EditTourist {...props} isMonolith={isMonolith}/>}
           />
           <Route
             path="/editFlight/:id"
             exact
-            component={(props) => <EditFlight {...props} />}
+            component={(props) => <EditFlight {...props} isMonolith={isMonolith}/>}
           />
           <Route path="/tourist/:id" exact component={FullTourist} />
           <Route path="/flight/:id" exact component={Flight} />

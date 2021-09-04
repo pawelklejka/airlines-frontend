@@ -5,6 +5,7 @@ import classes from './ManageTourists.module.css';
 import {Pagination, Row, Col, Alert} from 'react-bootstrap';
 import axios from 'axios';
 import Spinner from '../../components/Spinner/Spinner';
+import * as URI from '../../utils/uri';
 
 
 class ManageTourists extends Component {
@@ -14,14 +15,21 @@ class ManageTourists extends Component {
         message: '',
         totalResults: 0,
         totalPages: 0,
-        currentPageNo: 0
+        currentPageNo: 0,
+        uri: this.props.isMonolith ? URI.MONOLITH : URI.TOURIST_SERVICE
     }
 
     fetchTheTourists = (updatedPageNo) => {
-        const pageNumber = updatedPageNo ? updatedPageNo : '';
-        axios.get('http://localhost:8081/tourist/all?page=' + pageNumber)
+        let pageNumber = "";
+        if (updatedPageNo <= 0) {
+        pageNumber = 0;
+        } else {
+        pageNumber = updatedPageNo ? updatedPageNo : "";
+        }
+        axios.get(`${this.state.uri}/tourist/?page=` + pageNumber)
             .then(response => {
                 const tourists = Object.entries(response.data);
+                console.log(tourists)
                 const totalPages = tourists[4][1];
                 const resultNotFoundMsg = ! tourists[0][1].length
                                         ? 'There are no more search results. Go back.'
@@ -56,6 +64,7 @@ class ManageTourists extends Component {
             })
         }
     }
+    
 
     onClickPageChangeHandler = (type, e) =>{
         e.preventDefault();
@@ -77,7 +86,7 @@ class ManageTourists extends Component {
 
     onClickDeleteTouristHandler = (event, id) => {
         event.preventDefault();
-        axios.delete('http://localhost:8081/tourist/' + id).then(() => {
+        axios.delete(`${this.state.uri}/tourist/` + id).then(() => {
             this.fetchTheTourists();
         })
     }

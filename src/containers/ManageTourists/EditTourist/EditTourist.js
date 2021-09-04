@@ -3,6 +3,7 @@ import {Button, Card, Form} from 'react-bootstrap';
 import classes from './EditTourist.module.css';
 import axios from 'axios';
 import Flight from '../../../components/Flight/Flight';
+import * as URI from '../../../utils/uri';
 
 class EditTourist extends Component {
     state = {
@@ -17,12 +18,13 @@ class EditTourist extends Component {
         },
         loading: false,
         message: '',
+        uri: this.props.isMonolith ? URI.MONOLITH : URI.TOURIST_SERVICE
 
         }
 
     
     getTouristFromDatabase = () =>{
-            axios.get('http://localhost:8081/tourist/' + this.props.match.params.id,)
+            axios.get(`${this.state.uri}/tourist/` + this.props.match.params.id,)
             .then(response => {
                 const tourist = Object.entries(response.data);
                 const resultNotFoundMsg = ! tourist.length
@@ -33,10 +35,10 @@ class EditTourist extends Component {
                         name: tourist[0][1],
                         surname: tourist[1][1],
                         sex: tourist[2][1],
-                        country: tourist[3][1],
-                        dateOfBirth: tourist[4][1],
-                        notes: tourist[5][1],
-                        id: tourist[6][1]
+                        country: tourist[4][1],
+                        dateOfBirth: tourist[5][1],
+                        notes: tourist[6][1],
+                        id: tourist[8][1]
                     },
                     message: resultNotFoundMsg,
                     loading: false });
@@ -65,7 +67,7 @@ class EditTourist extends Component {
             dateOfBirth: this.state.tourist.dateOfBirth,
             notes: this.state.tourist.notes
         }
-            axios.put('http://localhost:8081/tourist/' + this.props.match.params.id, tourist)
+            axios.put(`${this.state.uri}/tourist/` + this.props.match.params.id, tourist)
             .then(
                 this.setState({
                     tourist:{
