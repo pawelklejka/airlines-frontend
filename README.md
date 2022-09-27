@@ -1,5 +1,10 @@
 # airlines-frontend - MASTER THESIS PROJECT
 
+### Monolith Backend repo:
+https://github.com/pawelklejka/airlines-backend
+### Microservices Backend repo:
+https://github.com/pawelklejka/airlines-backend-microservices
+
 ### To run application:
 ```docker
 docker run -p 8085:80 pawelklejka/airlines-frontend
