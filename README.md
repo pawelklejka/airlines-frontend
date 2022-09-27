@@ -17,4 +17,4 @@ docker run -p 8085:80 pawelklejka/airlines-frontend
 ![flights](https://user-images.githubusercontent.com/24233415/192457519-72c13ec1-ffd0-4b52-ba81-630509bf3814.png)
 #### 5. There are independent tabs for adding tourists and flights to database
 ![addtourist](https://user-images.githubusercontent.com/24233415/192457551-7ea51c79-70bb-4d7c-9e21-614c560ebf56.png)
-
+#### 6. Switch Endpoints button changes endpoints from Monolith Endpoints adressess to Microservices Endpoints adresses and vice versa
